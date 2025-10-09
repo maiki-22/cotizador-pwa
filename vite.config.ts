@@ -1,3 +1,4 @@
+// vite.config.ts
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
@@ -6,7 +7,6 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [
     react(),
-
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
@@ -14,7 +14,8 @@ export default defineConfig({
         name: "Cotizador",
         short_name: "Cotizador",
         description: "Cotizador PWA",
-        start_url: "/",
+        start_url: "/cotizador-pwa/", // <= importante
+        scope: "/cotizador-pwa/", // <= agrega scope
         display: "standalone",
         background_color: "#ffffff",
         theme_color: "#0ea5e9",
@@ -30,5 +31,5 @@ export default defineConfig({
       },
     }),
   ],
-  base: "/cotizador-pwa/",
+  base: "/cotizador-pwa/", // ya lo tienes OK
 });
