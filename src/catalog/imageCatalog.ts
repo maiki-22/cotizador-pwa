@@ -1,20 +1,25 @@
 // src/catalog/imageCatalog.ts
 import type { ItemType, ItemOptions } from "../stores/quoteDraft";
 
+// 🧭 Helper: respeta el base path de GH Pages
+const withBase = (p: string) => import.meta.env.BASE_URL + p.replace(/^\//, "");
+
 // Carga build-safe de imágenes (Vite). Si no encuentra en src/, cae a /public/images.
 const FILES = import.meta.glob("../images/**/*.{png,jpg,jpeg}", {
   eager: true,
   as: "url",
 }) as Record<string, string>;
 
+// ⚠️ IMPORTANTE: el fallback debe respetar el base en GH Pages
 const fallbackPublic = (dir: string, file?: string) =>
-  file ? `/images/${dir}/${file}` : undefined;
+  file ? withBase(`images/${dir}/${file}`) : undefined;
 
 function lookup(dir: string, file?: string) {
   if (!file) return undefined;
   const key = Object.keys(FILES).find((k) =>
     k.replace(/\\/g, "/").endsWith(`/images/${dir}/${file}`)
   );
+  // Si existe en src/, FILES[key] ya trae el base correcto; si no, usamos /public con BASE_URL
   return key ? FILES[key] : fallbackPublic(dir, file);
 }
 
