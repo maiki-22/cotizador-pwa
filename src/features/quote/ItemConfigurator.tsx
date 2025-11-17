@@ -487,7 +487,7 @@ export default function ItemConfigurator({ tempId, onCancel, onSave }: Props) {
             {/* Ubicación */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Ubicación
+                Detalle
               </label>
               <input
                 className="w-full h-12 rounded-xl border border-gray-300 px-4 bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"

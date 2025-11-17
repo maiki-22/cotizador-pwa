@@ -623,7 +623,7 @@ export function QuoteDoc({
 
                   {it.location && (
                     <View style={styles.detailRow}>
-                      <Text style={styles.detailLabel}>Ubicación</Text>
+                      <Text style={styles.detailLabel}>Detalle</Text>
                       <Text style={styles.detailValueBold}>{it.location}</Text>
                     </View>
                   )}
