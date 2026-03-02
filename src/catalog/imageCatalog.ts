@@ -7,7 +7,8 @@ const withBase = (p: string) => import.meta.env.BASE_URL + p.replace(/^\//, "");
 // Carga build-safe de imágenes (Vite). Si no encuentra en src/, cae a /public/images.
 const FILES = import.meta.glob("../images/**/*.{png,jpg,jpeg}", {
   eager: true,
-  as: "url",
+  query: "?url",
+  import: "default",
 }) as Record<string, string>;
 
 // ⚠️ IMPORTANTE: el fallback debe respetar el base en GH Pages
@@ -42,6 +43,9 @@ function materialFile(m?: ItemOptions["material"]) {
   if (s.includes("madera")) return "pvc-madera.png";
   if (s.includes("blanco")) return "pvc-blanco.png";
   if (s.includes("aluminio")) return "aluminio.png";
+    // Aluminio base y variantes por serie usan la misma imagen
+  if (s.includes("aluminio") || s.includes("alumino")) return "aluminio.png";
+
   return undefined;
 }
 

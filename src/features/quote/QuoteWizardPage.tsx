@@ -1,7 +1,7 @@
 // src/features/quote/QuoteWizardPage.tsx
 import { useEffect, useMemo, useState } from "react";
 import { useQuoteDraft } from "../../stores/quoteDraft";
-import { listClients, insertClient, db } from "../../db";
+import { listClients, insertClient, searchClients, db } from "../../db";
 import type { Client, Quote, QuoteItem } from "../../models";
 import type { QuoteItemDraft } from "../../stores/quoteDraft";
 import { BRAND } from "../../brand";
@@ -336,8 +336,7 @@ function ExistingClientPicker({
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const mod = await import("../../db");
-      const data = q ? await mod.searchClients(q) : await listClients();
+      const data = q ? await searchClients(q) : await listClients();
       if (!cancelled) setRows(data);
     })();
     return () => {
@@ -829,7 +828,9 @@ function AddItemDialog({
   onPick: (t: ItemType) => void;
 }) {
   const [type, setType] = useState<ItemType | "">("");
-  const options = Object.entries(ITEM_TYPE_LABEL) as [ItemType, string][];
+  const options = (Object.entries(ITEM_TYPE_LABEL) as [ItemType, string][]).filter(
+    ([key]) => key !== "ventana_corredera_20"
+  );
 
   return (
     <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">

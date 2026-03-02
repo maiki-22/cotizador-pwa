@@ -19,7 +19,12 @@ export type ItemType =
 // Campos de opciones posibles (según el tipo se mostrarán algunas)
 export type ItemOptions = {
   // comunes a muchas ventanas/puertas/tabiquería
-  material?: "PVC Blanco" | "PVC Madera" | "Aluminio";
+   material?:
+    | "PVC Blanco"
+    | "PVC Madera"
+    | "Aluminio"
+    | "Aluminio serie 20"
+    | "Aluminio serie 25";
   glassType?: "Templado" | "Termopanel" | "Simple" | "Laminado";
   glassColor?: "incoloro" | "verde" | "gris" | "bronce";
 

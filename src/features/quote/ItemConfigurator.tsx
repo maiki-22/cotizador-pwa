@@ -19,8 +19,20 @@ const MATERIALS_BY_TYPE: Record<ItemType, readonly ItemOptions["material"][]> =
   {
     ventana_fija_42: ["PVC Blanco", "PVC Madera"],
     ventana_proyectante_42: ["PVC Blanco", "PVC Madera"],
-    ventana_corredera_20: ["PVC Blanco", "PVC Madera"],
-    ventana_corredera_25: ["PVC Blanco", "PVC Madera"],
+    ventana_corredera_20: [
+      "PVC Blanco",
+      "PVC Madera",
+      "Aluminio",
+      "Aluminio serie 20",
+      "Aluminio serie 25",
+    ],
+    ventana_corredera_25: [
+      "PVC Blanco",
+      "PVC Madera",
+      "Aluminio",
+      "Aluminio serie 20",
+      "Aluminio serie 25",
+    ],
     bow_windows: ["PVC Blanco", "PVC Madera", "Aluminio"],
     tabiqueria: ["Aluminio"],
     tabiqueria_banho: ["Aluminio"],

@@ -4,7 +4,7 @@ export const ITEM_TYPE_LABEL: Record<ItemType, string> = {
   ventana_fija_42: "Ventana Fija",
   ventana_proyectante_42: "Ventana Proyectante",
   ventana_corredera_20: "Ventana Corredera serie 20",
-  ventana_corredera_25: "Ventana Corredera serie 25",
+  ventana_corredera_25: "Ventana Corredera",
   bow_windows: "Bow Windows",
   tabiqueria: "Tabiquería",
   tabiqueria_banho: "Tabiquería de baño",
@@ -40,6 +40,13 @@ export type ItemConfig = {
 const MAT_PVC = ["PVC Blanco", "PVC Madera"] as const;
 const MAT_PVC_ALU = ["PVC Blanco", "PVC Madera", "Aluminio"] as const;
 const MAT_ALU = ["Aluminio"] as const;
+const MAT_PVC_ALU_SERIES = [
+  "PVC Blanco",
+  "PVC Madera",
+  "Aluminio",
+  "Aluminio serie 20",
+  "Aluminio serie 25",
+] as const;
 
 const GLASS_TYPES = ["Templado", "Termopanel", "Simple", "Laminado"] as const;
 const GLASS_COLORS = ["incoloro", "verde", "gris", "bronce"] as const;
@@ -63,7 +70,7 @@ export const ITEM_CATALOG: Record<ItemType, ItemConfig> = {
   },
   ventana_corredera_20: {
     showMaterial: true,
-    materialOptions: [...MAT_PVC],
+    materialOptions: [...MAT_PVC_ALU_SERIES],
     showGlassType: true,
     glassTypeOptions: [...GLASS_TYPES],
     showGlassColor: true,
@@ -71,7 +78,7 @@ export const ITEM_CATALOG: Record<ItemType, ItemConfig> = {
   },
   ventana_corredera_25: {
     showMaterial: true,
-    materialOptions: [...MAT_PVC],
+    materialOptions: [...MAT_PVC_ALU_SERIES],
     showGlassType: true,
     glassTypeOptions: [...GLASS_TYPES],
     showGlassColor: true,

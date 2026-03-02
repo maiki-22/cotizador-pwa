@@ -392,14 +392,38 @@ const formatDateCL = (ms: number) =>
 
 const pad2 = (n: number) => `${n}`.padStart(2, "0");
 
+function toPdfAssetSrc(src?: string) {
+  if (!src) return undefined;
+  if (/^(https?:|data:|blob:)/i.test(src)) return src;
+  if (typeof window !== "undefined") {
+    return new URL(src, window.location.origin).toString();
+  }
+  return src;
+}
+
 function materialDisplay(m?: string) {
   if (!m) return "N/A";
   const s = m.toLowerCase();
   if (s.includes("madera")) return "PVC Madera";
   if (s.includes("blanco")) return "PVC Blanco";
   if (s.includes("aluminio")) return "Aluminio";
+  if (s.includes("aluminio") && s.includes("25")) return "Aluminio serie 25";
+  if (s.includes("aluminio") && s.includes("20")) return "Aluminio serie 20";
   return m;
 }
+function titleWithMaterial(title: string, material?: string) {
+  if (!title || !material) return title;
+  const normalizedMaterial = materialDisplay(material);
+  if (!normalizedMaterial || normalizedMaterial === "N/A") return title;
+
+  const cleanTitle = title.trim();
+  const lowerTitle = cleanTitle.toLowerCase();
+  const lowerMaterial = normalizedMaterial.toLowerCase();
+  if (lowerTitle.includes(lowerMaterial)) return cleanTitle;
+
+  return `${cleanTitle} ${normalizedMaterial.toUpperCase()}`;
+}
+
 
 function glassDisplay(t?: string) {
   if (!t) return "N/A";
@@ -460,7 +484,7 @@ export function QuoteDoc({
           </View>
 
           <View style={styles.logoContainer}>
-            <Image src={logoSrc} style={styles.logo} />
+           <Image src={toPdfAssetSrc(logoSrc)} style={styles.logo} />
           </View>
         </View>
 
@@ -510,9 +534,8 @@ export function QuoteDoc({
 
         {/* Items */}
         {items.map((it, idx) => {
-          const imgSrc = imageForQuote(
-            it.type as ItemType,
-            (it as any).options ?? {}
+         const imgSrc = toPdfAssetSrc(
+            imageForQuote(it.type as ItemType, (it as any).options ?? {})
           );
           const qty = it.quantity ?? 1;
           const unit = it.unitPriceCents ?? 0;
@@ -539,7 +562,7 @@ export function QuoteDoc({
               {/* Header del item */}
               <View style={styles.itemHeader}>
                 <Text style={styles.itemNumber}>#{pad2(idx + 1)}</Text>
-                <Text style={styles.itemTitle}>{it.title}</Text>
+                 <Text style={styles.itemTitle}>{titleWithMaterial(it.title, it.options?.material)}</Text>
               </View>
 
               {/* Body del item */}
