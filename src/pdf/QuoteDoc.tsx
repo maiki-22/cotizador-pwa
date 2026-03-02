@@ -395,7 +395,7 @@ const pad2 = (n: number) => `${n}`.padStart(2, "0");
 function materialDisplay(m?: string) {
   if (!m) return "N/A";
   const s = m.toLowerCase();
-  if (s.includes("madera")) return "Madera";
+  if (s.includes("madera")) return "PVC Madera";
   if (s.includes("blanco")) return "PVC Blanco";
   if (s.includes("aluminio")) return "Aluminio";
   return m;
